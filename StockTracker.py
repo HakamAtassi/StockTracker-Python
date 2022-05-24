@@ -207,7 +207,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Stock Tracker"))
         self.stock.setText(_translate("MainWindow", "Bitcoin:"))
         self.refreshButton.setText(_translate("MainWindow", "Refresh"))
-        self.promptText.setText(_translate("MainWindow", "Input new Ticker symbol (eg. AAPL):"))
+        self.promptText.setText(_translate("MainWindow", "Input new ticker symbol (eg. AAPL):"))
         self.priceBox.setText(_translate("MainWindow", "$"+currentPrice+"/BTC"))
         self.inputBitcoin.setText(_translate("MainWindow", "Input BTC amount for estimate: "))
         self.getBTCButton.setText(_translate("MainWindow", "Caclulate"))
