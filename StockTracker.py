@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
 
 
 
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Stock Tracker")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -103,7 +103,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.Ticker3.setFont(font)
-        self.Ticker3.setText("")
+        self.Ticker3.setText("") ## error here
         self.Ticker3.setObjectName("Ticker3")
         self.Ticker4 = QtWidgets.QLabel(self.centralwidget)
         self.Ticker4.setGeometry(QtCore.QRect(20, 160, 100, 21))
@@ -204,7 +204,7 @@ class Ui_MainWindow(object):
         self.allTickers = []
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Stock Tracker"))
         self.stock.setText(_translate("MainWindow", "Bitcoin:"))
         self.refreshButton.setText(_translate("MainWindow", "Refresh"))
         self.promptText.setText(_translate("MainWindow", "Input new Ticker symbol (eg. AAPL):"))
@@ -216,7 +216,7 @@ class Ui_MainWindow(object):
     def takeinputs(self):
         bitcoinAmount = float(self.estimateValue.text())
         bitcoinWorth=str(float(bitcoinAmount)*float(currentPrice))
-        self.bitcoinValue.setText("$"+bitcoinWorth)
+        self.bitcoinValue.setText("$"+str(round(float(bitcoinWorth),4)))
         print(bitcoinAmount)
         newTicker=str(self.newTicker.text())
 
@@ -238,22 +238,33 @@ class Ui_MainWindow(object):
 
 
         if self.counter ==0:
-            self.TickerPrice2.setText("$"+self.CurrentPrice[0:8])
+           # self.TickerPrice2.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice2.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
+
             self.Ticker2.setText(self.allTickers[self.counter])
         if self.counter ==1:
-            self.TickerPrice3.setText("$"+self.CurrentPrice[0:8])
+            #self.TickerPrice3.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice3.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
+
+
             self.Ticker3.setText(self.allTickers[self.counter])
         if self.counter ==2:
-            self.TickerPrice4.setText("$"+self.CurrentPrice[0:8])
+           # self.TickerPrice4.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice4.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
             self.Ticker4.setText(self.allTickers[self.counter])
         if self.counter ==3:
-            self.TickerPrice5.setText("$"+self.CurrentPrice[0:8])
+            #self.TickerPrice5.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice5.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
             self.Ticker5.setText(self.allTickers[self.counter])
         if self.counter ==4:
-            self.TickerPrice6.setText("$"+self.CurrentPrice[0:8])
+            #self.TickerPrice6.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice6.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
+
             self.Ticker6.setText(self.allTickers[self.counter])
         if self.counter ==5:
-            self.TickerPrice7.setText("$"+self.CurrentPrice[0:8])
+
+            #self.TickerPrice7.setText("$"+self.CurrentPrice[0:8])
+            self.TickerPrice7.setText("$"+str(round(float(self.CurrentPrice[0:8]),4)))
             self.Ticker7.setText(self.allTickers[self.counter])
 
         self.counter += 1
@@ -263,7 +274,7 @@ class Ui_MainWindow(object):
         refreshTickerData = yf.Ticker("BTC-USD")
         refreshTickerDf = refreshTickerData.history(period='1m')
         refreshCurrentPrice = str(list(refreshTickerDf['Close'])).strip("[]")
-        self.priceBox.setText("$" + refreshCurrentPrice+"/BTC")
+        self.priceBox.setText("$" + str(round(float(refreshCurrentPrice),4))+"/BTC")
         print("bitcoin refreshed")
 
         for i in range(len(self.allTickers)):
@@ -314,11 +325,8 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    Stocks = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    ui.setupUi(Stocks)
+    Stocks.show()
     sys.exit(app.exec_())
-
-
-
